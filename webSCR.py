@@ -26,3 +26,6 @@ for i in range(len(job_title)):
    locations.append(locations[i].text)
 
 
+with open("E:\Projects\project\web scrapping\ file.csv", "w") as webscrapingfile:
+    wr = csv.writer(webscrapingfile)
+    wr.writerow(["job_title","company_names","descriptions","locations"])

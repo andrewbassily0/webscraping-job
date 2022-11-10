@@ -18,3 +18,11 @@ job_title = soup.find_all("h2",{"class":"css-m604qf"})
 company_names = soup.find_all("a",{"class":"css-17s97q8"})
 descriptions = soup.find_all("div",{"class":"css-y4udm8"})
 locations = soup.find_all("span",{"class":"css-5wys0k"})
+
+for i in range(len(job_title)):
+   job_title.append(job_title[i].text)
+   company_names.append(company_names[i].text)
+   descriptions.append(descriptions[i].text)
+   locations.append(locations[i].text)
+
+

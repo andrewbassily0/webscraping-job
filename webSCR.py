@@ -7,6 +7,8 @@ job_title= []
 company_names=[]
 descriptions=[]
 locations=[]
+links=[]
+salaries =[]
 
 
 result = requests.get("https://wuzzuf.net/search/jobs/?q=python+developer&a=hpb")
@@ -21,11 +23,22 @@ locations = soup.find_all("span",{"class":"css-5wys0k"})
 
 for i in range(len(job_title)):
    job_title.append(job_title[i].text)
+   links.append(links[i].find("a").attrs["href"])
    company_names.append(company_names[i].text)
    descriptions.append(descriptions[i].text)
    locations.append(locations[i].text)
+   salaries.append(salaries.text)
 
+for links in links:
+    result = requests.get(links)
+    src= result.content
+    soup = BeautifulSoup(src, "lmxl")
+    salaries = soup.find_all("div",{"class":"matching-requirment-icon-container"})
+
+list =[job_title,company_names,descriptions,locations,links]
+ex =zip_longest(*list)
 
 with open("E:\Projects\project\web scrapping\ file.csv", "w") as webscrapingfile:
     wr = csv.writer(webscrapingfile)
-    wr.writerow(["job_title","company_names","descriptions","locations"])
+    wr.writerow(["job_title","company_names","descriptions","locations","links"])
+    wr.writerows(ex)
